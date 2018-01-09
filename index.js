@@ -8,6 +8,8 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
+mongoose.connect(keys.mongoURI, {useMongoClient: true});
+
 app.use(bodyParser.json());
 
 require('./routes/testRoutes')(app);
