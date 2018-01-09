@@ -6,15 +6,24 @@ const passport = require('passport');
 
 const bodyParser = require('body-parser');
 
+const keys = require('./config/keys');
+
 const app = express();
 
 require('./models/User');
+
+require('./services/passport');
 
 mongoose.connect(keys.mongoURI, {useMongoClient: true});
 
 app.use(bodyParser.json());
 
+app.use(passport.initialize());
+
+
+
 require('./routes/testRoutes')(app);
+require('./routes/authRoutes')(app);
 
 
 if (process.env.NODE_ENV === 'production') {
