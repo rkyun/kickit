@@ -13,23 +13,23 @@ class Header extends Component {
         return;
       case false:
         return [
-        <li><a href="/auth/login">Login</a></li>,
-        <li><a href="/auth/register">Register</a></li>
+        <li key="1"><a href="/auth/login">Login</a></li>,
+        <li key="2"><a href="/auth/register">Register</a></li>
         ];
       default:
         return [
-            <li><a href="/">Matches</a></li>,
-            <li><a href="/">Venues</a></li>,
-            <li><a href="/">Players</a></li>
+            <li key="1"><a href="/">Matches</a></li>,
+            <li key="2"><a href="/">Venues</a></li>,
+            <li key="3"><a href="/">Players</a></li>
         ];
     }
   }
   render() {
     return (
        <nav>
-        <div class="nav-wrapper">
-          <a href="#" class="brand-logo">Logo</a>
-          <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <div className="nav-wrapper">
+          <a href="#" className="brand-logo">Logo</a>
+          <ul id="nav-mobile" className="right hide-on-med-and-down">
             {this.renderLinks()}
           </ul>
         </div>
