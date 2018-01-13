@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import Header from './Header';
 import SignIn from './auth/SignIn';
+import Register from './auth/Register';
 
 class App extends Component {
 
@@ -14,6 +15,7 @@ class App extends Component {
         <div>
           <Header />
           <Route exact path="/auth/login" component={SignIn} />
+          <Route exact path="/auth/register" component={Register} />
         </div>
        </BrowserRouter>
        

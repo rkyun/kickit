@@ -26,7 +26,7 @@ export function signInUser({username, password}, history) {
   }
 }
 
-export function registerUser({username, password, provider}) {
+export function registerUser({username, password, provider}, history) {
   return function(dispatch) {
     axios.post('/api/auth/register', {username, password, provider})
       .then(response => {

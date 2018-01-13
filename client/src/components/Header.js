@@ -26,24 +26,26 @@ class Header extends Component {
   }
   render() {
     return (
-      <div className="col-xs-12">
-          <nav className="navbar navbar-inverse navbar-embossed" role="navigation">
-            <div className="navbar-header">
-              <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
-                <span className="sr-only">Toggle navigation</span>
-              </button>
-              <a className="navbar-brand" href="#">KICKIT</a>
-            </div>
-            <div className="collapse navbar-collapse" id="navbar-collapse-01">
-              <ul className="nav navbar-nav navbar-left">
-               //app links
-               </ul>
-               <ul className="nav navbar-nav navbar-right">
-               {this.renderLinks()}
-               </ul>
-            </div>
-          </nav>
-        </div>
+      <div className="row">
+        <div className="col-xs-12">
+            <nav className="navbar navbar-inverse navbar-embossed" role="navigation">
+              <div className="navbar-header">
+                <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
+                  <span className="sr-only">Toggle navigation</span>
+                </button>
+                <a className="navbar-brand" href="#">KICKIT</a>
+              </div>
+              <div className="collapse navbar-collapse" id="navbar-collapse-01">
+                <ul className="nav navbar-nav navbar-left">
+                //app links
+                </ul>
+                <ul className="nav navbar-nav navbar-right">
+                {this.renderLinks()}
+                </ul>
+              </div>
+            </nav>
+          </div>
+      </div>
     );
   }
 }
