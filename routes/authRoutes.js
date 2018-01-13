@@ -29,11 +29,10 @@ module.exports = app => {
   app.post('/api/auth/register', (req, res, next) => {
 
     const {username, password, provider} = req.body;
-
     const user = new User({username, password, provider});
 
     user.save().then(() => {
-      res.send(user)
+      res.send({token: tokenForUser(user)})
     }).catch(err => {
       res.status(400).send(err);
     })
