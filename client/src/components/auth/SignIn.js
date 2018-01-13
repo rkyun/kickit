@@ -16,13 +16,13 @@ class SignIn extends Component {
 
     return (
       <div className="row">
-
-        <div className='input-field col s12'>
+        <div className='form-group col-md-12'>
+          <label>{field.label}</label>
           <input
             type={field.type}
             {...field.input}
-          />
-          <label>{field.label}</label>
+            className="form-control"
+          />         
         </div>
       </div>
     )
@@ -46,7 +46,7 @@ class SignIn extends Component {
     const { handleSubmit } = this.props;
     return (
       <div className="row">
-
+      <div className="col-md-6 col-md-offset-3">
 
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))} className="col s12">
 
@@ -67,6 +67,7 @@ class SignIn extends Component {
           <button className="btn btn-primary" action="submit">Sign In</button>
 
         </form>
+        </div>
       </div>
     );
   }
