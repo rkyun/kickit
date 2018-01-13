@@ -19,6 +19,25 @@ export function signInUser({username, password}, history) {
 
         history.push('/');
       })
+      .catch(()=>{
+        console.log('error :(');
+      });
 
+  }
+}
+
+export function registerUser({username, password, provider}) {
+  return function(dispatch) {
+    axios.post('/api/auth/register', {username, password, provider})
+      .then(response => {
+        dispatch({type: AUTH_USER});
+        
+        localStorage.setItem('token', response.data.token);
+
+        history.push('/')
+      })
+      .catch(()=>{
+        console.log('error :(');
+      })
   }
 }
