@@ -24,6 +24,7 @@ class Register extends Component {
             {...field.input}
             className="form-control"
           />         
+          {touched && error && <small style={{color: 'red'}}>{error}</small>}
         </div>
       </div>
     )
@@ -55,6 +56,15 @@ class Register extends Component {
             component={this.renderField}
           />
 
+          <Field
+            label="Confirm password"
+            name="confirmPassword"
+            type="password"
+            component={this.renderField}
+          />
+
+          
+
           <button className="btn btn-primary" action="submit">Sign up</button>
           </form>
         </div>
@@ -65,13 +75,37 @@ class Register extends Component {
 
 }
 
+function validate(values) {
+  const errors = {};
+  const { username, password, confirmPassword } = values;
+
+  if(!username){
+    errors.username = 'Username is required!';
+  }
+
+  if(!password) {
+    errors.password = 'Password is required!';
+  }
+
+  if(!password) {
+    errors.password = 'Confirm your password!';
+  }
+
+  if(confirmPassword && password && password !== confirmPassword){
+    errors.confirmPassword = 'Given passwords dont match';
+  }
+
+  return errors;
+
+}
 
 function mapStateToProps(state) {
   return { errorMessage: state.auth.error }
 }
 
 export default reduxForm({
-  form: 'register'
+  form: 'register',
+  validate
 })(
   connect(mapStateToProps, actions)((withRouter(Register)))
 );
