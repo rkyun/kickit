@@ -2,14 +2,16 @@
   "name": "kickit-app-web",
   "version": "0.1.0",
   "private": true,
-   "proxy": {
+  "proxy": {
     "/api/*": {
       "target": "http://localhost:3001"
     }
   },
   "dependencies": {
     "axios": "^0.17.1",
-    "materialize-css": "^0.100.2",
+    "bootstrap": "^3.3.7",
+    "flat-ui": "^2.1.1",
+    "jquery": "^3.2.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
