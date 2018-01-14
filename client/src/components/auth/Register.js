@@ -10,11 +10,17 @@ import { connect } from 'react-redux';
 
 class Register extends Component {
 
-  
+  renderAlert() {
+    if(this.props.errorMessage){
+      return (
+        <div className="alert alert-danger">{this.props.errorMessage}</div>
+      );
+    }
+    
+  }
 
   renderField(field) {
     const { meta: { touched, error } } = field;
-
     return (
       <div className="row">
         <div className='form-group col-md-12'>
@@ -62,9 +68,8 @@ class Register extends Component {
             type="password"
             component={this.renderField}
           />
-
-          
-
+                 
+          {this.renderAlert()}
           <button className="btn btn-primary" action="submit">Sign up</button>
           </form>
         </div>

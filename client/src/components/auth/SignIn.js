@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
 
+import validator from 'validator';
+
 import {withRouter} from 'react-router-dom';
 
 import * as actions from '../../actions';
@@ -22,7 +24,8 @@ class SignIn extends Component {
             type={field.type}
             {...field.input}
             className="form-control"
-          />         
+          />   
+          {touched && error && <small style={{color: 'red'}}>{error}</small>}      
         </div>
       </div>
     )
@@ -78,8 +81,38 @@ function mapStateToProps(state) {
   return { errorMessage: state.auth.error }
 }
 
+function validate(values){
+  const errors = {}
+
+
+  const { email, password } = values;
+
+  
+  if(!email){
+    errors.email ='Type your email!';
+  }
+
+  if(email){
+    console.log(validator.isEmail(email));
+  }
+
+  if(email && !validator.isEmail(email)){
+    errors.email='It\'s not corrent email address';
+  }
+
+  if(!password) {
+    errors.password = 'Type your password!';
+  }
+
+  console.log(values);
+
+  return errors;
+
+}
+
 export default reduxForm({
-    form: 'signin'
+    form: 'signin',
+    validate
   })(
     connect(mapStateToProps, actions)((withRouter(SignIn)))
   );

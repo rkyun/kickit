@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
-import { AUTH_USER } from './types';
+import { AUTH_USER, AUTH_ERROR } from './types';
 
 
 
@@ -19,8 +19,8 @@ export function signInUser({email, password}, history) {
 
         history.push('/');
       })
-      .catch((err)=>{
-        console.log(err,'error :(');
+      .catch((error)=>{
+         dispatch(authError('Bad credentials'));
       });
 
   }
@@ -36,8 +36,17 @@ export function registerUser({email, password, provider}, history) {
 
         history.push('/')
       })
-      .catch(()=>{
-        console.log('error :(');
-      })
+      .catch((error)=>{
+        console.log(error);
+         dispatch(authError(error.response.data.error))
+      });
+  }
+}
+
+export function authError(error) {
+  console.log('error', error);
+  return {
+    type: AUTH_ERROR,
+    payload: error
   }
 }

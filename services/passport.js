@@ -20,18 +20,18 @@ passport.use(new JwtStrategy(jwtOptions, (payload, done) => {
     }
     return done(null, user)
   }).catch(() => {
-    return done(null, false);
+    return done(null, false, );
   })
 }));
 
 
 passport.use(new LocalStrategy({usernameField: 'email'}, (email, password, done) => {
-  console.log(email);
+
   User.findUserByCredentials(email, password).then(user => {
-     console.log(user);
+     
     done(null, user);
   }).catch((err) => {
-     console.log(err);
-    done(err, false);
+    
+    done(err, false, );
   })
 }));

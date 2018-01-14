@@ -23,22 +23,32 @@ module.exports = app => {
   })
 
   app.post('/api/auth/login',requireSignin, (req, res, next) => {
-    console.log(req.body, 'body');
     res.send({token: tokenForUser(req.user)});
   });
 
   app.post('/api/auth/register', (req, res, next) => {
-    
-    const {email, password, provider} = req.body;
-    const user = new User({email, password, provider});
 
-    user.save().then(() => {
-       console.log(req.body, 'body');
-      res.send({token: tokenForUser(user)})
-    }).catch(err => {
-      console.log(req.body, 'body');
-      res.status(400).send(err);
-    })
+    const { email, password, provider } = req.body;
+
+    if (!email || !password) {
+      return res.status(422).send({ error: 'You need provide email and password' });
+    }
+
+
+    User.findOne({ email }).then((existingUser) => {
+
+      if (existingUser) {
+        return res.status(422).send({ error: 'Email is in use.' });
+      }
+
+      const user = new User({ email, password, provider });
+
+      user.save().then(() => {
+        res.send({ token: tokenForUser(user) })
+      }).catch(error => {
+        return res.status(422).send({ error: error._message });
+      });
+    });
   });
 
 }
