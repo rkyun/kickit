@@ -100,6 +100,10 @@ function validate(values) {
     errors.password = 'Password is required!';
   }
 
+  if(password && password.length < 6){
+    errors.password = 'Password must be minimum 6 letters'
+  }
+
   if(!password) {
     errors.password = 'Confirm your password!';
   }

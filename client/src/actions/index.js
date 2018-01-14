@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
-import { AUTH_USER, AUTH_ERROR } from './types';
+import { AUTH_USER, AUTH_ERROR, UNAUTH_USER } from './types';
 
 
 
@@ -41,6 +41,11 @@ export function registerUser({email, password, provider}, history) {
          dispatch(authError(error.response.data.error))
       });
   }
+}
+
+export function Logout(){
+  localStorage.removeItem('token');
+  return { type: UNAUTH_USER }
 }
 
 export function authError(error) {
