@@ -85,7 +85,7 @@ function validate(values) {
   const { email, password, confirmPassword } = values;
 
   if(!email){
-    errors.username = 'Username is required!';
+    errors.email = 'Email is required!';
   }
 
   if(!password) {
