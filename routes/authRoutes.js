@@ -23,17 +23,20 @@ module.exports = app => {
   })
 
   app.post('/api/auth/login',requireSignin, (req, res, next) => {
+    console.log(req.body, 'body');
     res.send({token: tokenForUser(req.user)});
   });
 
   app.post('/api/auth/register', (req, res, next) => {
-
-    const {username, password, provider} = req.body;
-    const user = new User({username, password, provider});
+    
+    const {email, password, provider} = req.body;
+    const user = new User({email, password, provider});
 
     user.save().then(() => {
+       console.log(req.body, 'body');
       res.send({token: tokenForUser(user)})
     }).catch(err => {
+      console.log(req.body, 'body');
       res.status(400).send(err);
     })
   });

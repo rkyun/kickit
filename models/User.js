@@ -6,7 +6,7 @@ const { Schema } =  mongoose;
 
 const userSchema = new Schema ({
   provider: String,
-  username: String,
+  email: String,
   password: String,
 });
 
@@ -24,9 +24,9 @@ userSchema.pre('save', function (next) {
   }
 })
 
-userSchema.statics.findUserByCredentials = function (username, password) {
+userSchema.statics.findUserByCredentials = function (email, password) {
   const User = this;
-  return User.findOne({ username }).then((user) => {
+  return User.findOne({ email }).then((user) => {
     if (!user) {
       return Promise.reject();
     }

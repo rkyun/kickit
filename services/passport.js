@@ -16,7 +16,7 @@ passport.use(new JwtStrategy(jwtOptions, (payload, done) => {
   User.findOne({ _id: payload.sub }).then(user => {
 
     if (!user) {
-      return done(null, false, { message: 'Incorrect username' });
+      return done(null, false, { message: 'Incorrect email' });
     }
     return done(null, user)
   }).catch(() => {
@@ -25,10 +25,13 @@ passport.use(new JwtStrategy(jwtOptions, (payload, done) => {
 }));
 
 
-passport.use(new LocalStrategy((username, password, done) => {
-  User.findUserByCredentials(username, password).then(user => {
+passport.use(new LocalStrategy({usernameField: 'email'}, (email, password, done) => {
+  console.log(email);
+  User.findUserByCredentials(email, password).then(user => {
+     console.log(user);
     done(null, user);
   }).catch((err) => {
+     console.log(err);
     done(err, false);
   })
 }));

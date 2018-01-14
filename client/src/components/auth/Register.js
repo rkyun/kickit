@@ -30,9 +30,9 @@ class Register extends Component {
     )
   }
 
-  handleFormSubmit({ username, password }) {
+  handleFormSubmit({ email, password }) {
     const { history } = this.props;
-    this.props.registerUser({ username, password, provider:'local' }, history);
+    this.props.registerUser({ email, password, provider:'local' }, history);
   }
 
   render() {
@@ -43,8 +43,8 @@ class Register extends Component {
         <div className="col-md-6 col-md-offset-3">
           <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
           <Field
-            label="Username"
-            name="username"
+            label="Email"
+            name="email"
             type="text"
             component={this.renderField}
           />
@@ -77,9 +77,9 @@ class Register extends Component {
 
 function validate(values) {
   const errors = {};
-  const { username, password, confirmPassword } = values;
+  const { email, password, confirmPassword } = values;
 
-  if(!username){
+  if(!email){
     errors.username = 'Username is required!';
   }
 

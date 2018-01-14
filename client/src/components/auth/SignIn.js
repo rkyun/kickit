@@ -28,9 +28,9 @@ class SignIn extends Component {
     )
   }
 
-  handleFormSubmit({ username, password }) {
+  handleFormSubmit({ email, password }) {
     const { history } = this.props;
-    this.props.signInUser({ username, password }, history);
+    this.props.signInUser({ email, password }, history);
   }
 
   renderAlert() {
@@ -51,8 +51,8 @@ class SignIn extends Component {
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))} className="col s12">
 
           <Field
-            label="Username"
-            name="username"
+            label="Email"
+            name="email"
             type="text"
             component={this.renderField}
           />
