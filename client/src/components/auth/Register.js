@@ -4,9 +4,13 @@ import { reduxForm, Field } from 'redux-form';
 
 import { withRouter } from 'react-router-dom';
 
+import validator from 'validator';
+
 import * as actions from '../../actions';
 
 import { connect } from 'react-redux';
+
+
 
 class Register extends Component {
 
@@ -86,6 +90,10 @@ function validate(values) {
 
   if(!email){
     errors.email = 'Email is required!';
+  }
+
+  if (email && !validator.isEmail(email)){
+    errors.email = 'It\'s not correct email address';
   }
 
   if(!password) {

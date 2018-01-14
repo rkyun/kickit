@@ -97,7 +97,7 @@ function validate(values){
   }
 
   if(email && !validator.isEmail(email)){
-    errors.email='It\'s not corrent email address';
+    errors.email='It\'s not correct email address';
   }
 
   if(!password) {
