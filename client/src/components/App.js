@@ -7,6 +7,7 @@ import SignIn from './auth/SignIn';
 import Register from './auth/Register';
 import Logout from './auth/Logout';
 import Home from './Home';
+import Venues from './venue/Venues';
 
 class App extends Component {
 
@@ -18,6 +19,7 @@ class App extends Component {
         <div>
           <Header />
           <Route exact path="/home" component={Home} />
+          <Route exact path="/venues" component={Venues} />
           <Route exact path="/auth/login" component={SignIn} />
           <Route exact path="/auth/register" component={Register} />
           <Route exact path="/auth/logout" component={Logout} />

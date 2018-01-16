@@ -39,7 +39,7 @@ class Header extends Component {
               <div className="collapse navbar-collapse" id="navbar-collapse-01">
                 <ul className="nav navbar-nav navbar-left">
                    <li key="1"><Link to="#">Matches</Link></li>,
-                   <li key="2"><Link to="#">Venues</Link></li>
+                   <li key="2"><Link to="/venues">Venues</Link></li>
                 </ul>
                 <ul className="nav navbar-nav navbar-right">
                 {this.renderLinks()}
