@@ -11,6 +11,7 @@ const keys = require('./config/keys');
 const app = express();
 
 require('./models/User');
+require('./models/Venue');
 
 require('./services/passport');
 
@@ -24,6 +25,7 @@ app.use(passport.initialize());
 
 require('./routes/testRoutes')(app);
 require('./routes/authRoutes')(app);
+require('./routes/venueRoutes')(app);
 
 
 if (process.env.NODE_ENV === 'production') {
