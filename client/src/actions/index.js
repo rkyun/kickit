@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
-import { AUTH_USER, AUTH_ERROR, UNAUTH_USER } from './types';
+import { AUTH_USER, AUTH_ERROR, UNAUTH_USER, FETCH_VENUES } from './types';
 
 
 
@@ -53,5 +53,18 @@ export function authError(error) {
   return {
     type: AUTH_ERROR,
     payload: error
+  }
+}
+
+export function fetchVenues(){
+  return function(dispatch) {
+    axios.get('/api/venues')
+      .then(venues => {
+        console.log(venues , 'dasdas');
+        dispatch({
+          type: FETCH_VENUES,
+          payload: venues
+        });
+      });
   }
 }
