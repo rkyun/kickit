@@ -40,6 +40,7 @@ class Header extends Component {
                 <ul className="nav navbar-nav navbar-left">
                    <li key="1"><Link to="#">Matches</Link></li>,
                    <li key="2"><Link to="/venues">Venues</Link></li>
+                   <li key="3"><Link to ="/venues/new">New Vennue</Link></li>
                 </ul>
                 <ul className="nav navbar-nav navbar-right">
                 {this.renderLinks()}

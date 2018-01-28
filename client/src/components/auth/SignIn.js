@@ -51,7 +51,7 @@ class SignIn extends Component {
       <div className="row">
       <div className="col-md-6 col-md-offset-3">
 
-        <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))} className="col s12">
+        <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
 
           <Field
             label="Email"

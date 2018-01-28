@@ -21,7 +21,7 @@ module.exports = app => {
     const { name, address, description, coordinates } = req.body;
 
     if ( !name || !address || !description || !coordinates){
-      return res.status(422).send({error: 'Missing parameters'})
+      return res.status(409).send({error: 'Missing parameters'})
     }
 
     const venue = new Venue({name, address, description, coordinates});
@@ -29,7 +29,7 @@ module.exports = app => {
     venue.save().then(() => {
         res.send(venue);
       }).catch(error => {
-        return res.status(422).send({erorr: error._message});
+        return res.status(422).send({error: error._message});
       })
   });
 

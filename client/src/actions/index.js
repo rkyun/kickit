@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
-import { AUTH_USER, AUTH_ERROR, UNAUTH_USER, FETCH_VENUES } from './types';
+import { AUTH_USER, AUTH_ERROR, UNAUTH_USER, FETCH_VENUES, ADD_VENUE, ADD_VENUE_ERROR } from './types';
 
 
 
@@ -65,6 +65,32 @@ export function fetchVenues(){
           type: FETCH_VENUES,
           payload: venues
         });
+      });
+  }
+}
+
+export function newVenueError(error) {
+  
+  return {
+    type: ADD_VENUE_ERROR,
+    payload: error
+  }
+}
+
+export function newVenue({name, address, description}, history){
+  const token = localStorage.getItem('token');
+  return function(dispatch) {
+    axios.post('/api/venues', {name, address, description, coordinates: {lat: 10, long: 10}}, {
+      headers: {Authorization: token }
+    })
+      .then(response => {
+        dispatch({
+          type: ADD_VENUE,
+        });
+
+        history.push('/venues')
+      }).catch(error => {
+        dispatch(newVenueError(error.response.data.error))
       });
   }
 }
