@@ -10,6 +10,13 @@ import { withRouter } from 'react-router-dom';
 
 import GoogleMapReact from 'google-map-react';
 
+const { googleMapLoader }  = GoogleMapReact;
+
+
+const bootstrapURLKeys = {
+  libraries: ['places'].join(','),
+}
+
 
 const Marker = () => (
   <div style={{
@@ -23,11 +30,25 @@ const Marker = () => (
 
 class NewVenue extends Component {
 
+  
+
   constructor(props){
     super(props);
     this.state = {
       center: {lat: 50.79646, lng: 19.12409}
     }
+
+    this.onPlacesChanged = () => {
+      const place = this.autocomplete.getPlace();
+      this.setState({center: {lat: place.geometry.location.lat(), lng: place.geometry.location.lng() }});
+      
+    }
+
+    googleMapLoader(bootstrapURLKeys)
+        .then((maps) => {
+          this.autocomplete = new maps.places.Autocomplete(document.getElementById('ac'));
+          this.autocomplete.addListener('place_changed', this.onPlacesChanged);
+        });
   }
 
   renderField(field){
@@ -40,6 +61,7 @@ class NewVenue extends Component {
           <input 
             type={field.type}
             {...field.input}
+            id={field.id}
             className="form-control"
             />
             {touched && error && <small style={{color: 'red'}}>{error}</small>}
@@ -81,7 +103,7 @@ class NewVenue extends Component {
 
   handleFormSubmit({name, address, description}){
     const { history } = this.props;
-    this.props.newVenue({name, address, description}, history);
+    this.props.newVenue({name, address, description, coordinates: {lat: this.state.center.lat, long: this.state.center.lng}}, history);
   }
 
 
@@ -101,6 +123,7 @@ class NewVenue extends Component {
             label="Address"
             name="address"
             type="text"
+            id="ac"
             component={this.renderField}
           />
           <Field
@@ -119,11 +142,15 @@ class NewVenue extends Component {
         
         <div className="col-md-8" style={ {height: '400px'}}>
           <GoogleMapReact
-            defaultCenter={this.state.center}
-            defaultZoom={12}
+            center={this.state.center}
+            defaultZoom={16}
           >
-           
-          <Marker lat={59.95} lng={30.33} />
+           {this.props.venues.map(venue => {
+             return (
+               <Marker lat={venue.coordinates.lat} lng={venue.coordinates.long} />
+             )
+           })}
+          <Marker lat={this.state.center.lat} lng={this.state.center.lng} />
            
           </GoogleMapReact>
         </div>
@@ -134,7 +161,8 @@ class NewVenue extends Component {
 }
 
 function mapStateToProps(state){
-  return { errorMessage: state.venues.error}
+  return { errorMessage: state.venues.error,
+          venues: state.venues.list }
 }
 
 

@@ -77,10 +77,10 @@ export function newVenueError(error) {
   }
 }
 
-export function newVenue({name, address, description}, history){
+export function newVenue({name, address, description, coordinates}, history){
   const token = localStorage.getItem('token');
   return function(dispatch) {
-    axios.post('/api/venues', {name, address, description, coordinates: {lat: 10, long: 10}}, {
+    axios.post('/api/venues', {name, address, description, coordinates}, {
       headers: {Authorization: token }
     })
       .then(response => {
